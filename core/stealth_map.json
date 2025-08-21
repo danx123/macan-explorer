@@ -1,0 +1,7 @@
+{
+    ".bak": true,
+    ".tmp": true,
+    ".env": true,
+    ".log": false,
+    ".md": false
+}

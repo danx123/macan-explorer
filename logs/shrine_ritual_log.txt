@@ -1,0 +1,39 @@
+2025-08-04 00:13:36,984 - ERROR - core.logger - [tab-failure] Failed to open tab for Home Shrine
+2025-08-04 00:13:40,949 - ERROR - core.logger - [tab-failure] Failed to open tab for D:\
+2025-08-04 00:14:59,074 - ERROR - core.logger - [tab-failure] Failed to open tab for Home Shrine
+2025-08-04 00:15:15,476 - ERROR - core.logger - [tab-failure] Failed to open tab for E:\
+2025-08-04 00:15:25,035 - ERROR - core.logger - [tab-failure] Failed to open tab for D:\
+2025-08-04 00:19:06,865 - ERROR - core.logger - [tab-failure] Failed to open tab for Home Shrine
+2025-08-04 00:19:10,109 - ERROR - core.logger - [tab-failure] Failed to open tab for E:\
+2025-08-04 00:19:37,379 - ERROR - core.logger - [tab-failure] Failed to open tab for D:\
+2025-08-04 00:19:57,908 - INFO - core.logger - [tab-close] Tab index 0 closed
+2025-08-04 00:19:59,247 - ERROR - core.logger - [tab-failure] Failed to open tab for F:\
+2025-08-04 00:33:58,055 - ERROR - core.logger - [tab-failure] Failed to open tab for Home Shrine
+2025-08-04 00:34:04,071 - ERROR - core.logger - [tab-failure] Failed to open tab for E:\
+2025-08-04 01:24:31,760 - ERROR - core.logger - [tab-failure] Failed to open tab for Home Shrine
+2025-08-04 01:24:54,906 - ERROR - core.logger - [tab-failure] Failed to open tab for E:\
+2025-08-04 01:27:02,370 - ERROR - core.logger - [tab-failure] Failed to open tab for Home Shrine
+2025-08-04 01:27:10,266 - ERROR - core.logger - [tab-failure] Failed to open tab for F:\
+2025-08-04 01:28:00,929 - INFO - core.logger - [tab-close] Tab index 1 closed
+2025-08-04 01:28:23,286 - ERROR - core.logger - [tab-failure] Failed to open tab for G:\
+2025-08-04 01:33:47,691 - ERROR - core.logger - [tab-failure] Failed to open tab for Home Shrine
+2025-08-04 01:34:44,184 - ERROR - core.logger - [tab-failure] Failed to open tab for F:\
+2025-08-04 01:34:50,475 - ERROR - core.logger - [tab-failure] Failed to open tab for G:\
+2025-08-04 01:35:02,037 - INFO - core.logger - [tab-close] Tab index 2 closed
+2025-08-04 01:35:02,964 - INFO - core.logger - [tab-close] Tab index 1 closed
+2025-08-04 01:35:08,395 - INFO - core.logger - [tab-close] Tab index 0 closed
+2025-08-04 01:35:09,730 - ERROR - core.logger - [tab-failure] Failed to open tab for E:\
+2025-08-04 01:35:13,435 - INFO - core.logger - [tab-close] Tab index 0 closed
+2025-08-04 01:35:14,241 - ERROR - core.logger - [tab-failure] Failed to open tab for D:\
+2025-08-04 21:22:34,547 - ERROR - core.logger - [tab-failure] Failed to open tab for Home Shrine
+2025-08-13 21:37:16,622 - ERROR - core.logger - [tab-failure] Failed to open tab for Home Shrine
+2025-08-13 21:38:12,508 - ERROR - core.logger - [tab-failure] Failed to open tab for Home Shrine
+2025-08-13 21:38:43,160 - ERROR - core.logger - [tab-failure] Failed to open tab for E:\
+2025-08-13 21:38:53,763 - INFO - core.logger - [tab-close] Tab index 1 closed
+2025-08-13 21:39:09,755 - INFO - core.logger - [tab-close] Tab index 0 closed
+2025-08-13 21:39:10,674 - ERROR - core.logger - [tab-failure] Failed to open tab for F:\
+2025-08-13 21:39:13,316 - ERROR - core.logger - [tab-failure] Failed to open tab for G:\
+2025-08-13 21:39:41,421 - INFO - core.logger - [tab-close] Tab index 1 closed
+2025-08-13 21:39:54,856 - ERROR - core.logger - [tab-failure] Failed to open tab for F:\
+2025-08-13 21:39:57,138 - INFO - core.logger - [tab-close] Tab index 0 closed
+2025-08-13 21:39:58,002 - INFO - core.logger - [tab-close] Tab index 0 closed
