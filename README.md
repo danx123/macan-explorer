@@ -15,10 +15,15 @@ Macan Explorer was developed as a modern alternative to the standard file explor
 ---
 
 ## 📸 Screenshot
-<img width="1006" height="601" alt="Screenshot 2025-08-21 143548" src="https://github.com/user-attachments/assets/94dd37a2-2c40-4736-b8bf-a5c0a479f106" />
+<img width="997" height="599" alt="image" src="https://github.com/user-attachments/assets/cc15a7a8-f55c-46b6-8e40-96d67b13eb49" />
 
 ---
 
+## 📜 Changelog
+* Rewrite Engine
+---  
+
+  
 
 ## 📦 Release Notes
 - **Source Code (this repo):** contains the **base version** of Macan Explorer.
