@@ -15,12 +15,13 @@ Macan Explorer was developed as a modern alternative to the standard file explor
 ---
 
 ## 📸 Screenshot
-<img width="997" height="599" alt="image" src="https://github.com/user-attachments/assets/cc15a7a8-f55c-46b6-8e40-96d67b13eb49" />
+<img width="997" height="660" alt="Screenshot 2025-09-03 003218" src="https://github.com/user-attachments/assets/045747a0-517e-4ea6-9ef4-55baa766a4cd" />
+
 
 ---
 
-## 📜 Changelog
-* Rewrite Engine
+## 📜 Changelog v2.1.0
+* Change generate thumbnail to OpenCV
 ---  
 
   
