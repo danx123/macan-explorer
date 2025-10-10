@@ -20,9 +20,9 @@ Macan Explorer was developed as a modern alternative to the standard file explor
 
 ---
 
-## 📜 Changelog v2.2.0
+## 📜 Changelog v2.2.1
 * Update Framework
-* Change generate thumbnail to OpenCV
+
 ---  
 
   
