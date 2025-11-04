@@ -15,28 +15,19 @@ Macan Explorer was developed as a modern alternative to the standard file explor
 ---
 
 ## 📸 Screenshot
-<img width="1061" height="644" alt="Screenshot 2025-10-21 193230" src="https://github.com/user-attachments/assets/5f5a8733-c5e6-4fb0-9d29-798ee5369b12" />
-<img width="1200" height="1920" alt="macan-explorer-v250" src="https://github.com/user-attachments/assets/20458e54-3eaf-4d67-8a12-2d2bb93935ff" />
+<img width="1000" height="601" alt="Screenshot 2025-11-05 050742" src="https://github.com/user-attachments/assets/bf8c236f-bc31-44ca-ae41-3b06e818b927" />
+
 
 
 
 ---
 
-## 📜 Changelog v2.5.0
-Changelog:
-
-- Drag and Drop:
-You can now drag a file or folder (single or multiple) from within Mac Explorer to an external window (e.g., to the Desktop or another folder).
-You can also drop a file or folder from outside the Mac Explorer window into the Mac Explorer window. This will trigger a copy-paste operation to the active folder, complete with a progress dialog.
-
-- More Informative Status Bar:
-The status bar at the bottom now displays detailed information about the items you select.
-If nothing is selected, it displays the total number of items in the folder.
-If a single item is selected, it displays: File Name | Type: File Type | Size: File Size.
-If multiple items are selected, it displays: X items selected | Total Size: Total Combined Size.
-
-- New Refresh Icon:
-The SVG icon for the Refresh button has been replaced with a new icon (rotate-cw).
+## 📜 Changelog v3.0.0
+- Added Cache Management
+- Added Context Menu: Open in new tab
+- Added drive properties
+- Added function drag-and-drop folder to sidebar (favorite)
+- Improve Performance
 
 ---  
 
