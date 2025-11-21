@@ -22,13 +22,8 @@ Macan Explorer was developed as a modern alternative to the standard file explor
 
 ---
 
-## 📜 Changelog v3.0.0
-- Added Cache Management
-- Added Context Menu: Open in new tab
-- Added drive properties
-- Added function drag-and-drop folder to sidebar (favorite)
-- Improve Performance
-
+## 📜 Changelog v3.2.0
+- Update Framework
 ---  
 
   
