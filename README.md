@@ -22,8 +22,8 @@ Macan Explorer was developed as a modern alternative to the standard file explor
 
 ---
 
-## 📜 Changelog v3.3.0
-- Update Library
+## 📜 Changelog v4.3.0
+- Update Framework
 ---  
 
   
