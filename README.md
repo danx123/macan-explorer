@@ -181,7 +181,7 @@ All of the following survive application restart:
 ### 1. Clone or download
 
 ```bash
-git clone https://github.com/your-org/macan-explorer.git
+git clone https://github.com/danx123/macan-explorer.git
 cd macan-explorer
 ```
 
