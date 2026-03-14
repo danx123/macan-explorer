@@ -15,6 +15,8 @@
 
 ---
 
+
+
 ## Overview
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all in a single self-contained Python file.
@@ -442,7 +444,6 @@ MainWindow
 ## Known Limitations
 
 - **Single-pane layout** — dual-pane (commander-style) browsing is not available in v6.
-- **No network/FTP paths** — remote path browsing is not supported; local filesystem only.
 - **Video features require OpenCV** — if `cv2` is not installed, video files show a generic icon; hover preview and video Quick View are disabled.
 - **Recycle Bin requires `send2trash`** — without it, deletion is permanent (with confirmation). On network drives or certain Linux configurations, `send2trash` may fall back to permanent deletion even when installed.
 - **Undo scope** — the undo feature in Smart Rename covers only the last batch operation; general filesystem undo (copy/paste/delete) is not implemented.
