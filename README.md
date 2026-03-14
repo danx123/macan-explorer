@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v5.0.0
+### Enterprise Edition · v6.0.0
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-5.0.0-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-6.0.0-purple?style=flat-square)
 
 </div>
 
@@ -19,32 +19,16 @@
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all in a single self-contained Python file.
 
-Version 5.0 represents a landmark release that merges the best innovations from the **SmartFileManager** project into Macan Explorer's architecture, resulting in a fully docked panel system, a production-grade Smart Rename workflow, and a comprehensive QSettings persistence layer.
+Version 6.0 — *"The Media & Workflow Release"* — builds on the v5 foundation with a focus on **media awareness**, **search ergonomics**, and **tab workflow**. It introduces a Quick View side panel, folder media thumbnails, video hover previews, inline scoped search, a proper "+" tab button, and full Recycle Bin integration via `send2trash`.
 
 ---
 
-## Table of Contents
-
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Running the Application](#running-the-application)
-- [Usage Guide](#usage-guide)
-- [Keyboard Shortcuts](#keyboard-shortcuts)
-- [Configuration & Persistence](#configuration--persistence)
-- [File Structure](#file-structure)
-- [Architecture Overview](#architecture-overview)
-- [Known Limitations](#known-limitations)
-- [Changelog](#changelog)
-- [Credits](#credits)
-
----
 
 ## Features
 
 ### 🗂️ Navigation
 - **Multi-tab browsing** — open as many directory tabs as needed; tabs are movable and closable
+- **"+" tab button** — embedded directly in the tab bar, always adjacent to the last open tab; click to open a new tab instantly
 - **Breadcrumb navigation bar** — click any path segment to jump directly to that directory
 - **Full history stack** — Back (`Alt+←`), Forward (`Alt+→`), Up (`Alt+↑`) with keyboard shortcuts
 - **Address bar** — type or paste any path and press Enter to navigate instantly
@@ -56,7 +40,8 @@ Version 5.0 represents a landmark release that merges the best innovations from 
 ### 📋 File Operations
 - Copy, Cut, Paste with clipboard-style queue across folders and tabs
 - Drag-and-drop between the file view and sidebar bookmark list
-- Rename (inline `F2`), Delete (`Del`), New Folder (`Ctrl+Shift+N`), New File
+- **Move to Recycle Bin** (`Del`) — sends items to the OS Recycle Bin / Trash via `send2trash`; falls back to permanent delete with confirmation if trash is unavailable
+- Rename (inline `F2`), New Folder (`Ctrl+Shift+N`), New File
 - Select All (`Ctrl+A`)
 - Multi-file operations with a progress dialog for large batches
 - Context menu for all operations with keyboard shortcut hints
@@ -66,16 +51,41 @@ Version 5.0 represents a landmark release that merges the best innovations from 
 |---|---|
 | **Details** | Table view with name, size, type, and date columns; sortable headers |
 | **List** | Compact list view for dense directory browsing |
-| **Icons** | Large icon grid with image and video thumbnails |
+| **Icons** | Large icon grid with image thumbnails, video thumbnails, and folder media previews |
 
 - View mode preference is persisted and restored per session
 
 ### 🖼️ Thumbnail Engine
 - Instant image thumbnails for **PNG, JPG, JPEG, BMP, GIF, WEBP**
 - Video thumbnails for **MP4, MKV, AVI, MOV, WEBM, FLV, WMV, MPG, MPEG** *(requires OpenCV)*
-- Thumbnails generated off the main thread via `QThreadPool` (up to 4 concurrent workers) — UI never freezes
+- **Folder media detection** — folders containing images or videos display a composite preview of their contents (up to 4 items in a 2×2 grid) instead of a plain folder icon
+- **Video hover preview** — hovering over a video file shows a floating animated preview cycling through 8 frames sampled across the first 10 seconds; generated in a background thread, UI never blocks
+- Thumbnails generated off the main thread via `QThreadPool` (up to 4 concurrent workers)
 - MD5-hashed disk cache stored in `~/.macan_explorer/thumbnails/`
 - **Clear Thumbnail Cache** available in the toolbar More menu
+
+### 👁️ Quick View Panel *(F3)*
+Preview files instantly without opening an external application.
+
+- Toggled via `F3` or View → Toggle Quick View; appears as a resizable dock on the right side
+- Automatically previews whichever single file is selected in the active tab
+- **Image viewer** — renders the image scaled to the panel width; re-scales live as the panel is resized
+- **Text & code viewer** — monospaced reader with UTF-8 / Latin-1 auto-detection, truncated at 256 KB. Supports 40+ extensions including:
+  `txt`, `md`, `log`, `json`, `yaml`, `toml`, `csv`, `xml`, `html`, `css`,
+  `js`, `ts`, `py`, `java`, `c`, `cpp`, `h`, `rs`, `go`, `sh`, `bat`, `sql`, `rb`, `php` and more
+- **Video viewer** — displays a representative frame extracted at the 2-second mark *(requires OpenCV)*
+- **Unsupported types** — shows a clear "No preview available" notice
+- Metadata bar shows filename, image dimensions (where applicable), and file size
+
+### 🔎 Inline Search *(Ctrl+F)*
+- Search bar appears **inside the current file view** — no separate dialog
+- Two modes via drop-down:
+  - **Real-time** — filters as you type with a 300 ms debounce
+  - **Manual** — results update only on `Enter` or clicking **Search**
+- Search is **scoped to the current folder only** — direct children of the active path
+- Live match counter (`12 matches`, `1 match`)
+- Filter clears automatically when navigating to a different folder
+- Press `Esc` or `✕` to dismiss and restore the full file list
 
 ### ✏️ Smart Rename *(Ctrl+R)*
 A full-featured batch rename engine with live preview and undo support.
@@ -127,7 +137,7 @@ A full-featured batch rename engine with live preview and undo support.
 All of the following survive application restart:
 
 - Window size and position
-- Dock panel visibility (Activity Log, Smart Rename)
+- Dock panel visibility (Activity Log, Smart Rename, Quick View)
 - Dock panel layout and positions
 - Smart Rename field values (all tabs)
 - Sidebar splitter proportions
@@ -143,21 +153,12 @@ All of the following survive application restart:
   - **macOS** → `Terminal.app`
   - **Linux** → auto-detects: `gnome-terminal`, `xterm`, `konsole`, `xfce4-terminal`, `lxterminal`
 
-### 🔎 Search
-- In-bar fuzzy search with `Ctrl+F` to focus the search input
-- Results displayed in a `SearchResultsDialog`; double-click to navigate to the result or open its parent folder
-
 ### 🪟 Multi-Window
 - Open a full independent application window with `Ctrl+N`
 - Each window maintains its own tab set, settings, and navigation history
 
 ---
 
-## Screenshots
-
-
-
----
 
 ## Requirements
 
@@ -170,9 +171,10 @@ All of the following survive application restart:
 ### Optional
 | Dependency | Version | Purpose |
 |---|---|---|
-| opencv-python | 4.x+ | Video thumbnail generation |
+| `opencv-python` | 4.x+ | Video thumbnails, video hover preview, video Quick View |
+| `send2trash` | 1.8+ | Move deleted files to OS Recycle Bin / Trash |
 
-> Without OpenCV, all features remain available except video thumbnails. A warning is printed to the console on startup if OpenCV is not found.
+> All optional dependencies degrade gracefully — the application runs without them and disables only the related features.
 
 ---
 
@@ -201,14 +203,14 @@ source venv/bin/activate
 
 ### 3. Install dependencies
 
-**Minimum (no video thumbnails):**
+**Minimum (core features only):**
 ```bash
 pip install PySide6
 ```
 
-**Full install (with video thumbnails):**
+**Recommended (video thumbnails + Recycle Bin):**
 ```bash
-pip install PySide6 opencv-python
+pip install PySide6 opencv-python send2trash
 ```
 
 ---
@@ -216,10 +218,10 @@ pip install PySide6 opencv-python
 ## Running the Application
 
 ```bash
-python macan_explorer5.py
+python macan_explorer6.py
 ```
 
-That's it. No build step, no resource compilation, no installer required.
+No build step, no resource compilation, no installer required.
 
 ---
 
@@ -235,7 +237,7 @@ That's it. No build step, no resource compilation, no installer required.
 | Go up one level | `Alt+↑` or the up button |
 | Navigate via address bar | Click the address bar, type a path, press `Enter` |
 | Navigate via breadcrumb | Click any segment in the breadcrumb bar |
-| Open in a new tab | Right-click a folder → Open in New Tab |
+| Open in a new tab | Right-click a folder → Open in New Tab, or click `+` in the tab bar |
 | Switch tabs | Click the tab |
 
 ### File Operations
@@ -246,10 +248,24 @@ That's it. No build step, no resource compilation, no installer required.
 | Cut | `Ctrl+X` |
 | Paste | `Ctrl+V` |
 | Rename | `F2` |
-| Delete | `Del` |
+| Move to Recycle Bin | `Del` |
 | Select All | `Ctrl+A` |
 | New Folder | `Ctrl+Shift+N` |
 | Properties | Right-click → Properties |
+
+### Inline Search
+
+1. Press `Ctrl+F` — the search bar slides open inside the current file view.
+2. Choose **Real-time** (filter as you type) or **Manual** (press Enter to search).
+3. Type your query — only files and folders in the **current folder** are filtered.
+4. Press `Esc` or click `✕` to close and restore the full listing.
+
+### Quick View
+
+1. Press `F3` to open the Quick View panel on the right side.
+2. Click any single file in the file view — it previews automatically.
+3. Resize the panel by dragging its left edge.
+4. Press `F3` again to close it.
 
 ### Smart Rename Workflow
 
@@ -269,10 +285,7 @@ That's it. No build step, no resource compilation, no installer required.
 
 ### Drive Properties
 
-Right-click any drive in the **Drives** sidebar panel and select **Drive Properties** to view:
-- Total disk capacity
-- Used and free space (formatted)
-- Usage percentage with a visual progress bar
+Right-click any drive in the **Drives** sidebar panel and select **Drive Properties** to view total capacity, used and free space, and a visual usage bar.
 
 ---
 
@@ -296,14 +309,15 @@ Right-click any drive in the **Drives** sidebar panel and select **Drive Propert
 | `Ctrl+V` | Paste |
 | `Ctrl+A` | Select all |
 | `F2` | Rename selected item |
-| `Del` | Delete selected items |
+| `Del` | Move to Recycle Bin |
 | `Ctrl+Shift+N` | Create new folder |
 
 ### Application
 | Shortcut | Action |
 |---|---|
 | `Ctrl+R` | Open Smart Rename panel |
-| `Ctrl+F` | Focus search bar |
+| `Ctrl+F` | Open inline search bar |
+| `F3` | Toggle Quick View panel |
 | `Ctrl+T` | Open terminal in current directory |
 | `Ctrl+D` | Toggle Dark / Light theme |
 | `Ctrl+H` | Toggle show / hide hidden files |
@@ -318,13 +332,14 @@ Macan Explorer stores its data in two locations:
 ```
 ~/.macan_explorer/
 ├── macan_explorer_config.json   # Bookmarks, view mode, theme, show-hidden flag
+├── thumbnails/                  # MD5-hashed video thumbnail cache
 └── logs/
     ├── shrine_ritual_log.txt    # General application log (rotating, max 1 MB × 5 backups)
     └── error_log.txt            # Error-only log (rotating, max 1 MB × 5 backups)
 ```
 
 ### QSettings — OS native store
-Session state (window geometry, dock layout, Smart Rename field values, sidebar splitter sizes) is stored via Qt's `QSettings` under:
+Session state (window geometry, dock layout, Smart Rename field values, sidebar splitter sizes, Quick View visibility) is stored via Qt's `QSettings` under:
 
 | Platform | Location |
 |---|---|
@@ -339,13 +354,13 @@ To reset all session state, delete the relevant QSettings key or file.
 ## File Structure
 
 ```
-macan_explorer5.py          # Entire application — single self-contained file
+macan_explorer5.py          # base project not latest version
 ```
 
 ### Internal Module Layout
 
 ```
-macan_explorer5.py
+macan_explorer6.py
 │
 ├── SVG_ICONS               dict       Embedded SVG icon data
 ├── _ICON_COLORS            dict       Per-theme stroke colors (dark / light)
@@ -356,25 +371,27 @@ macan_explorer5.py
 ├── WorkerSignals           QObject    Shared signal class for thread workers
 ├── FolderSizeWorker        QRunnable  Async folder size calculation
 ├── ThumbnailWorker         QRunnable  Async video thumbnail generation (OpenCV)
+├── VideoPreviewWorker      QRunnable  Async video frame extraction for hover preview  ★ new
 │
 ├── ErrorHandler                       Structured error capture
 ├── ShrineLogger                       Rotating file logger setup
 ├── ActivityLog                        In-app log with color-coded levels
 ├── ConfigManager                      JSON-backed user config (bookmarks, prefs)
 │
-├── ThumbnailIconProvider  QFileSystemModel   Custom model with image+video thumbnails
-├── SortFilterProxyModel   QSortFilterProxyModel   Search/filter proxy
+├── ThumbnailIconProvider  QFileSystemModel   Custom model with image+video+folder thumbnails
+├── SortFilterProxyModel   QSortFilterProxyModel   Scoped search + hidden-file filter
 │
 ├── BreadcrumbBar          QWidget    Clickable path segment bar
 ├── CommandBar             QToolBar   Main toolbar with all actions + update_icons()
-├── FileView               QWidget    Core file browser (tree/list/icons + operations)
+├── VideoHoverPreview      QLabel     Floating animated video hover preview overlay  ★ new
+├── FileView               QWidget    Core file browser (tree/list/icons + inline search)
 │
 ├── Sidebar                QWidget    Resizable QSplitter: Quick Access | Drives | Bookmarks
-├── TabManager             QWidget    QTabWidget wrapper with add/close/rename logic
+├── TabManager             QWidget    QTabWidget with "+" dummy tab + add/close logic
 ├── TitleBar               QWidget    Custom frameless titlebar + update_icons()
 │
 ├── DrivePropertiesDialog  QDialog    Disk usage info for a drive root
-├── SearchResultsDialog    QDialog    Search results with navigate-on-click
+├── SearchResultsDialog    QDialog    Legacy search results (fallback)
 ├── PropertiesDialog       QDialog    File/folder metadata + inline rename
 ├── OperationProgressDialog QProgressDialog  Progress for multi-file ops
 │
@@ -384,10 +401,13 @@ macan_explorer5.py
 ├── SmartRenameDock        QWidget    Dockable Smart Rename UI (3 tabs + live preview)
 │
 ├── AboutDialog            QDialog    Application info dialog
+├── QuickViewPanel         QWidget    Right-side file preview panel  ★ new
 ├── ActivityLogDock        QWidget    Dockable Activity Log UI
 │
 └── MainWindow             QMainWindow  Root window — menu, layout, QSettings, signals
 ```
+
+*★ new in v6.0.0*
 
 ---
 
@@ -395,41 +415,39 @@ macan_explorer5.py
 
 Macan Explorer is structured around a **signal-driven MVC-like pattern**:
 
-- **Model layer:** `ThumbnailIconProvider` (extends `QFileSystemModel`) is the single source of truth for directory data; proxy model handles sorting and filtering.
-- **View layer:** `FileView` renders the model in three switchable view modes via `QTreeView` / `QListView`; all interaction emits signals upward.
-- **Controller layer:** `MainWindow` wires signals from `FileView`, `CommandBar`, `Sidebar`, `TabManager`, and both dock panels into coordinated actions.
-- **Worker threads:** `FolderSizeWorker` and `ThumbnailWorker` run in a shared `QThreadPool`; results are emitted via `Signal` and consumed on the main thread.
+- **Model layer:** `ThumbnailIconProvider` (extends `QFileSystemModel`) is the single source of truth for directory data; `SortFilterProxyModel` handles sorting, hidden-file filtering, and the scoped search filter.
+- **View layer:** `FileView` renders the model in three switchable view modes via `QTreeView` / `QListView`; all interaction emits signals upward. The inline search bar lives inside `FileView`.
+- **Controller layer:** `MainWindow` wires signals from `FileView`, `CommandBar`, `Sidebar`, `TabManager`, and all dock panels into coordinated actions.
+- **Worker threads:** `FolderSizeWorker`, `ThumbnailWorker`, and `VideoPreviewWorker` run in shared `QThreadPool` instances; results are emitted via `Signal` and consumed on the main thread.
 - **Persistence:** `QSettings` handles session state; `ConfigManager` (JSON) handles user data (bookmarks, preferences).
 
 ```
 MainWindow
- ├── TitleBar          ← drag move, window controls, theme-aware icons
- ├── CommandBar        ← toolbar actions, address bar, search, theme-aware icons
- ├── BreadcrumbBar     ← path segments → navigate signal
- ├── Sidebar           ← QSplitter [QuickAccess | Drives | Bookmarks]
- ├── TabManager        ← n × FileView tabs
- │    └── FileView     ← ThumbnailIconProvider + SortFilterProxyModel
- ├── ActivityLogDock   ← QDockWidget (bottom, lazy-loaded)
- └── SmartRenameDock   ← QDockWidget (bottom, tabified, lazy-loaded)
+ ├── TitleBar              ← drag move, window controls, theme-aware icons
+ ├── CommandBar            ← toolbar actions, address bar, search, theme-aware icons
+ ├── BreadcrumbBar         ← path segments → navigate signal
+ ├── Sidebar               ← QSplitter [QuickAccess | Drives | Bookmarks]
+ ├── TabManager            ← n × FileView tabs + "+" dummy tab
+ │    └── FileView         ← ThumbnailIconProvider + SortFilterProxyModel
+ │         ├── InlineSearchBar   ← real-time / manual scoped filter
+ │         └── VideoHoverPreview ← floating frame-animation overlay
+ ├── ActivityLogDock       ← QDockWidget (bottom, lazy-loaded)
+ ├── SmartRenameDock       ← QDockWidget (bottom, tabified, lazy-loaded)
+ └── QuickViewDock         ← QDockWidget (right, lazy-loaded)  ★ new
+      └── QuickViewPanel   ← image / text / video preview
 ```
 
 ---
 
 ## Known Limitations
 
-- **Single-pane layout** — dual-pane (commander-style) browsing is not available in v5.
+- **Single-pane layout** — dual-pane (commander-style) browsing is not available in v6.
 - **No network/FTP paths** — remote path browsing is not supported; local filesystem only.
-- **Video thumbnails require OpenCV** — if `cv2` is not installed, video files show a generic icon.
+- **Video features require OpenCV** — if `cv2` is not installed, video files show a generic icon; hover preview and video Quick View are disabled.
+- **Recycle Bin requires `send2trash`** — without it, deletion is permanent (with confirmation). On network drives or certain Linux configurations, `send2trash` may fall back to permanent deletion even when installed.
 - **Undo scope** — the undo feature in Smart Rename covers only the last batch operation; general filesystem undo (copy/paste/delete) is not implemented.
-- **Search is filename-only** — full-text content search inside files is not available.
-
----
-
-## Changelog
-
-See [CHANGELOG.md](CHANGELOG.md) for the full version history.
-
-**v5.0.0 highlights:** Smart Rename Engine, Activity Log, Breadcrumb Bar, Resizable Sidebar, Drive Properties, OS-native Quick Access icons, QSettings persistence, per-theme SVG icon rendering, Light theme readability fixes.
+- **Search is current-folder only** — recursive search across subdirectories is not yet available from the inline bar.
+- **No PDF preview** — PDF rendering libraries add significant binary weight and memory overhead that conflicts with the application's single-file, lightweight design goal.
 
 ---
 
@@ -437,7 +455,7 @@ See [CHANGELOG.md](CHANGELOG.md) for the full version history.
 
 **Developer:** Danx Exodus  
 **Organization:** Macan Angkasa  
-**Built with:** [Python](https://python.org) · [PySide6 / Qt6](https://doc.qt.io/qtforpython/) · [OpenCV](https://opencv.org) *(optional)*
+**Built with:** [Python](https://python.org) · [PySide6 / Qt6](https://doc.qt.io/qtforpython/) · [OpenCV](https://opencv.org) *(optional)* · [send2trash](https://github.com/arsenetar/send2trash) *(optional)*
 
 Portions of the Smart Rename engine and Activity Log were adapted from the **SmartFileManager** project (internal, same author).
 
