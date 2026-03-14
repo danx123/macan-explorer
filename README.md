@@ -14,7 +14,9 @@
 </div>
 
 ---
-
+## Screenshot
+![Dark Mode](screenshot/dark.png) 
+![Light Mode](screenshot/light.png)
 
 
 ## Overview
