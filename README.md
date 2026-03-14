@@ -218,7 +218,7 @@ pip install PySide6 opencv-python send2trash
 ## Running the Application
 
 ```bash
-python macan_explorer6.py
+python macan_explorer5.py
 ```
 
 No build step, no resource compilation, no installer required.
