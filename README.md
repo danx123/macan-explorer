@@ -102,9 +102,14 @@ A fully interactive media preview panel — no external application needed.
 - Auto-previews whichever single file is selected in the active tab
 - Panel width, visibility, and audio/video volume level persisted via QSettings
 
-**Image viewer** — scales to panel width; re-renders live on resize; shows pixel dimensions
+**Image viewer**
+- Renders the image scaled to the panel width; re-scales live as the panel is resized
+- Meta bar shows filename, pixel dimensions, and file size
 
-**Text & code viewer** — monospaced, UTF-8/Latin-1 auto-detect, 256 KB cap, 40+ extensions
+**Text & code viewer**
+- Monospaced reader with UTF-8 / Latin-1 auto-detection, truncated at 256 KB
+- Supports 40+ extensions: `txt`, `md`, `log`, `json`, `yaml`, `toml`, `csv`, `xml`, `html`, `css`, `js`, `ts`, `py`, `java`, `c`, `cpp`, `h`, `rs`, `go`, `sh`, `bat`, `sql`, `rb`, `php` and more
+
 
 **Audio player** *(requires `mutagen` + `PySide6-Addons`)*
 - Formats: **MP3, FLAC, OGG, M4A, AAC, WAV, WMA, OPUS, AIFF**
