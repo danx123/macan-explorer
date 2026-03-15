@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v8.0.0
+### Enterprise Edition · v8.5.0
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-8.0.0-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-8.5.0-purple?style=flat-square)
 
 </div>
 
@@ -19,7 +19,7 @@
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all distributed as a small set of self-contained Python files.
 
-Version 8.0 — *"Performance, Settings & Documentation"* — is an infrastructure release that benefits every existing feature. The folder media detection pipeline is rebuilt as a fully lazy, thread-safe background system that eliminates startup lag when browsing large drives. A comprehensive Settings dialog exposes every configurable parameter across eight categories. A searchable Help system ships 30 enterprise-grade articles covering every workflow in the application.
+Version 8.5 — *"Windows Shell Context Menu Integration"* — A dedicated module that reads the Windows registry at runtime and injects installed-application context menu entries directly into Macan Explorer's right-click menu — identical to what Windows Explorer shows, without any manual configuration by the user.
 
 ---
 
@@ -102,14 +102,9 @@ A fully interactive media preview panel — no external application needed.
 - Auto-previews whichever single file is selected in the active tab
 - Panel width, visibility, and audio/video volume level persisted via QSettings
 
-**Image viewer**
-- Renders the image scaled to the panel width; re-scales live as the panel is resized
-- Meta bar shows filename, pixel dimensions, and file size
+**Image viewer** — scales to panel width; re-renders live on resize; shows pixel dimensions
 
-**Text & code viewer**
-- Monospaced reader with UTF-8 / Latin-1 auto-detection, truncated at 256 KB
-- Supports 40+ extensions: `txt`, `md`, `log`, `json`, `yaml`, `toml`, `csv`, `xml`, `html`, `css`, `js`, `ts`, `py`, `java`, `c`, `cpp`, `h`, `rs`, `go`, `sh`, `bat`, `sql`, `rb`, `php` and more
-
+**Text & code viewer** — monospaced, UTF-8/Latin-1 auto-detect, 256 KB cap, 40+ extensions
 
 **Audio player** *(requires `mutagen` + `PySide6-Addons`)*
 - Formats: **MP3, FLAC, OGG, M4A, AAC, WAV, WMA, OPUS, AIFF**
@@ -415,10 +410,11 @@ To reset all session state, delete the relevant QSettings key or file.
 macan_explorer.py         # Core application          (~5,529 lines)
 explorer_settings.py      # Settings dialog module    (~741 lines)
 explorer_help.py          # Help system module        (~808 lines)
+explorer_shell.py		  # Shell Context Menu		  (~562 lines)
 screenshot/
 ├── dark.png              # Dark theme screenshot
-└── light.png             # Light theme screenshot
-CHANGELOG.md
+├── light.png             # Light theme screenshot
+└── settings.png          # Settings screenshot
 README.md
 ```
 
@@ -474,39 +470,30 @@ explorer_help.py
 └── HelpDialog         QDialog    30-article searchable help (lazy import)
 ```
 
-*★ new in v8.0.0*
+*★ new in v8.5.0*
 
 ---
 
-## Architecture Overview
+### `explorer_shell — Windows Shell Context Menu Integration
 
-Macan Explorer follows a **signal-driven MVC-like pattern**:
+A dedicated module that reads the Windows registry at runtime and injects
+installed-application context menu entries (WinRAR, 7-Zip, VS Code,
+Notepad++, etc.) directly into Macan Explorer's right-click menu — identical
+to what Windows Explorer shows, without any manual configuration by the user.
 
-- **Model layer:** `ThumbnailIconProvider` (extends `QFileSystemModel`) is the single source of truth; `SortFilterProxyModel` handles sorting, hidden-file filtering, and scoped search. Folder thumbnail detection is now fully lazy and thread-safe — a `QTimer.singleShot` debounce gate triggers `FolderThumbnailWorker` which collects file paths in the background; all Qt painting happens on the main thread in `_on_folder_thumb_done`.
-- **View layer:** `FileView` renders the model in three switchable modes; `QuickViewPanel` previews the selected file with full media playback.
-- **Controller layer:** `MainWindow` wires all signals into coordinated actions. Settings changes propagate via cache clears and tab refreshes.
-- **Worker threads:** `FolderSizeWorker`, `FolderThumbnailWorker`, `ThumbnailWorker`, and `VideoPreviewWorker` run in dedicated `QThreadPool` instances; all results are delivered to the main thread via signals.
-- **Persistence:** `QSettings` (session state) + `ConfigManager` JSON (bookmarks, feature flags, preferences).
-- **Modules:** `explorer_settings` and `explorer_help` are lazily imported to avoid startup overhead.
+**Registry Keys Read**
 
-```
-MainWindow
- ├── TitleBar              ← frameless controls, theme-aware icons
- ├── CommandBar            ← toolbar, address bar, search
- ├── BreadcrumbBar         ← path segments → navigate
- ├── Sidebar               ← QSplitter [QuickAccess | Drives | Bookmarks]
- ├── TabManager            ← n × FileView + "+" tab + context menu
- │    └── FileView         ← ThumbnailIconProvider + SortFilterProxyModel
- │         ├── InlineSearchBar        ← real-time / manual scoped filter
- │         └── VideoHoverPreview      ← floating frame-animation overlay
- ├── ActivityLogDock       ← QDockWidget, bottom, lazy-loaded
- ├── SmartRenameDock       ← QDockWidget, bottom, tabified
- └── QuickViewDock         ← QDockWidget, right, lazy-loaded
-      └── QuickViewPanel   ← image / text / audio▶ / video▶ / PDF📄
-
-[Ctrl+,] → explorer_settings.SettingsDialog   (lazy import)
-[F1]     → explorer_help.HelpDialog           (lazy import)
-```
+| Key | Scope |
+|---|---|
+| `HKCR\*\shell` | Verbs registered for all file types |
+| `HKCR\AllFilesystemObjects\shell` | Verbs for all files and folders combined |
+| `HKCR\.{ext}\shell` | Extension-specific verbs |
+| `HKCR\SystemFileAssociations\.{ext}\shell` | System-level type associations |
+| `HKCR\{ProgID}\shell` | Application ProgID verbs |
+| `HKCR\Directory\shell` | Folder verbs |
+| `HKCR\Folder\shell` | Secondary folder verb key |
+| `HKCR\Directory\Background\shell` | Empty-area right-click verbs |
+| `%APPDATA%\Microsoft\Windows\SendTo\` | Send to submenu items |
 
 ---
 
@@ -521,21 +508,6 @@ MainWindow
 - **Smart Rename undo** — covers only the most recent batch; general filesystem undo is not implemented.
 - **Inline search** — current folder only; recursive subdirectory search not yet available.
 
----
-
-## Changelog
-
-See [CHANGELOG.md](CHANGELOG.md) for the full version history.
-
-**v8.0.0 highlights:** Lazy thread-safe folder detection (`FolderThumbnailWorker` + `QTimer.singleShot`), Settings dialog (`Ctrl+,`, 8 sections, 741 lines), Help system (`F1`, 30 articles, 808 lines), 4 bug fixes including illegal Qt painting from worker thread.
-
-**v7.5.0 highlights:** Audio/video playback in Quick View, PDF rendering, Set as Wallpaper, Folder Properties context menu.
-
-**v6.5.0 highlights:** Tab close button fix, tab context menu, QSettings full persistence (column widths, sort, volume).
-
-**v6.0.0 highlights:** Inline scoped search, "+" tab, Quick View panel, folder thumbnails, video hover, Recycle Bin.
-
-**v5.0.0 / v4.3.0:** *(Source available)* — see Releases page.
 
 ---
 
