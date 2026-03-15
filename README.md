@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v7.5.0
+### Enterprise Edition · v8.0.0
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-7.5.0-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-8.0.0-purple?style=flat-square)
 
 </div>
 
@@ -17,9 +17,9 @@
 
 ## Overview
 
-Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all in a single self-contained Python file.
+Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all distributed as a small set of self-contained Python files.
 
-Version 7.5 — *"Rich Media & Context"* — transforms the Quick View panel into a fully interactive media workstation. Audio and video files are now playable inline with full transport controls, PDF documents render page by page, images can be set as the desktop wallpaper directly from the context menu, and right-clicking empty folder space now exposes folder properties. Every dependency remains optional and degrades gracefully.
+Version 8.0 — *"Performance, Settings & Documentation"* — is an infrastructure release that benefits every existing feature. The folder media detection pipeline is rebuilt as a fully lazy, thread-safe background system that eliminates startup lag when browsing large drives. A comprehensive Settings dialog exposes every configurable parameter across eight categories. A searchable Help system ships 30 enterprise-grade articles covering every workflow in the application.
 
 ---
 
@@ -27,7 +27,7 @@ Version 7.5 — *"Rich Media & Context"* — transforms the Quick View panel int
 
 > **Only versions 4.3.0 and 5.0.0 are publicly available** in this repository.
 >
-> Versions 6.0.0, 6.5.0, 7.5.0 and beyond are **closed-source** and not distributed.
+> Versions 6.0.0 and beyond are **closed-source** and not distributed.
 > This README documents the current feature set for reference purposes.
 > If you are looking to get started, download the latest open-source release from the
 > [Releases](https://github.com/danx123/macan-explorer/releases) page.
@@ -56,7 +56,7 @@ Version 7.5 — *"Rich Media & Context"* — transforms the Quick View panel int
 
 ### 🗂️ Navigation
 - **Multi-tab browsing** — open as many directory tabs as needed; tabs are movable and closable
-- **"+" tab button** — embedded directly in the tab bar, always adjacent to the last open tab; click to open a new tab instantly
+- **"+" tab button** — embedded directly in the tab bar, always adjacent to the last open tab
 - **Tab context menu** — right-click any tab to close it or open its path in a new independent window
 - **Breadcrumb navigation bar** — click any path segment to jump directly to that directory
 - **Full history stack** — Back (`Alt+←`), Forward (`Alt+→`), Up (`Alt+↑`) with keyboard shortcuts
@@ -74,8 +74,8 @@ Version 7.5 — *"Rich Media & Context"* — transforms the Quick View panel int
 - Select All (`Ctrl+A`)
 - Multi-file operations with a progress dialog for large batches
 - **Context menu** — full operation set with keyboard shortcut hints, plus:
-  - **"🖼️ Set as Wallpaper"** — appears when right-clicking any image file; cross-platform (Windows, macOS, Linux)
-  - **"Folder Properties"** — appears when right-clicking empty space; shows metadata for the currently open folder
+  - **"🖼️ Set as Wallpaper"** — right-click any image file; cross-platform (Windows, macOS, Linux)
+  - **"Folder Properties"** — right-click empty space; shows metadata for the currently open folder
 
 ### 🔍 View Modes
 | Mode | Description |
@@ -89,8 +89,8 @@ Version 7.5 — *"Rich Media & Context"* — transforms the Quick View panel int
 ### 🖼️ Thumbnail Engine
 - Instant image thumbnails for **PNG, JPG, JPEG, BMP, GIF, WEBP**
 - Video thumbnails for **MP4, MKV, AVI, MOV, WEBM, FLV, WMV, MPG, MPEG** *(requires OpenCV)*
-- **Folder media detection** — folders containing images or videos display a composite 2×2 grid preview instead of a plain folder icon
-- **Video hover preview** — hovering over a video file shows a floating animated preview cycling through 8 frames sampled across the first 10 seconds; generated in a background thread, UI never blocks
+- **Folder media detection** — folders containing images or videos display a composite 2×2 grid preview; scans are deferred via `QTimer.singleShot` and performed by a dedicated `FolderThumbnailWorker` background thread pool — **no UI lag even on large drives**
+- **Video hover preview** — hovering over a video shows a floating animated preview cycling 8 frames from the first 10 seconds; generated in a background thread
 - Thumbnails generated off the main thread via `QThreadPool` (up to 4 concurrent workers)
 - MD5-hashed disk cache stored in `~/.macan_explorer/thumbnails/`
 - **Clear Thumbnail Cache** available in the toolbar More menu
@@ -100,105 +100,88 @@ A fully interactive media preview panel — no external application needed.
 
 - Toggled via `F3` or View → Toggle Quick View; appears as a resizable dock on the right side
 - Auto-previews whichever single file is selected in the active tab
-- Panel width, visibility, and audio/video volume level are persisted via QSettings
+- Panel width, visibility, and audio/video volume level persisted via QSettings
 
-**Image viewer**
-- Renders the image scaled to the panel width; re-scales live as the panel is resized
-- Meta bar shows filename, pixel dimensions, and file size
+**Image viewer** — scales to panel width; re-renders live on resize; shows pixel dimensions
 
-**Text & code viewer**
-- Monospaced reader with UTF-8 / Latin-1 auto-detection, truncated at 256 KB
-- Supports 40+ extensions: `txt`, `md`, `log`, `json`, `yaml`, `toml`, `csv`, `xml`, `html`, `css`, `js`, `ts`, `py`, `java`, `c`, `cpp`, `h`, `rs`, `go`, `sh`, `bat`, `sql`, `rb`, `php` and more
+**Text & code viewer** — monospaced, UTF-8/Latin-1 auto-detect, 256 KB cap, 40+ extensions
 
 **Audio player** *(requires `mutagen` + `PySide6-Addons`)*
-- Supported formats: **MP3, FLAC, OGG, M4A, AAC, WAV, WMA, OPUS, AIFF**
-- Displays cover art (extracted from ID3 / FLAC Picture / M4A covr tags), title, artist, and album
-- Seek bar, position / duration labels, Play/Pause button, and volume slider
-- Volume level persisted across sessions via QSettings
+- Formats: **MP3, FLAC, OGG, M4A, AAC, WAV, WMA, OPUS, AIFF**
+- Cover art, title, artist, album; seek bar, position/duration labels, Play/Pause, volume slider
 
 **Video player** *(requires `PySide6-Addons`)*
-- Supported formats: **MP4, MKV, AVI, MOV, WEBM, FLV, WMV, MPG, MPEG**
-- Embedded `QVideoWidget` with seek bar, position / duration labels, Play/Pause, and volume slider
+- Formats: **MP4, MKV, AVI, MOV, WEBM, FLV, WMV, MPG, MPEG**
+- Embedded `QVideoWidget`; seek bar, Play/Pause, volume slider
 
 **PDF viewer** *(requires `pypdfium2`)*
-- Renders each page at 1.5× scale; all pages loaded into memory at open time
-- Previous / Next page buttons with `X / N` page counter; buttons auto-disable at boundaries
-- Pages auto-rescale to panel width on resize
+- Page-by-page rendering at 1.5× scale; ◀/▶ navigation; auto-rescale on resize
 
-**Unsupported types** — shows a clear "No preview available" notice
+**Unsupported types** — "No preview available" with install instruction where applicable
+
+### ⚙️ Settings *(Ctrl+,)* — **New in v8.0**
+A full-featured settings dialog with eight categorised sections:
+
+| Section | Controls |
+|---|---|
+| 🖼️ **Appearance** | Theme, sidebar visibility, status bar options |
+| 📁 **File View** | Thumbnail toggles, folder detection on/off, detection delay, default view mode |
+| 🎬 **Media** | Video hover frames, Quick View auto-play, PDF render scale |
+| 🔍 **Search** | Default mode (Real-time / Manual), debounce delay |
+| ✏️ **Smart Rename** | Confirm behaviour, live preview, rule persistence, max preview rows |
+| 🔔 **Notifications** | Activity log event types, status bar messages |
+| ⚡ **Performance** | Thread pool limits, cache size, lazy-load singleShot delay |
+| 🔒 **Privacy** | Cache persistence, log file writing, path inclusion in logs |
+
+Changes are written immediately to `ConfigManager` / `QSettings` and applied live on close.
+
+### 📖 Help System *(F1)* — **New in v8.0**
+A searchable, article-based help dialog with 30 articles across 9 sections:
+
+- Getting Started (Welcome, Installation, Interface Overview)
+- Navigation, File Operations, View Modes, Search, Quick View, Smart Rename
+- Keyboard Shortcuts full reference, Settings overview, QSettings key reference
+- Troubleshooting (7 documented issues with solutions)
+
+Live search filters both article titles and full article body text with a 250 ms debounce.
 
 ### 🔎 Inline Search *(Ctrl+F)*
 - Search bar appears **inside the current file view** — no separate dialog
-- Two modes via drop-down:
-  - **Real-time** — filters as you type with a 300 ms debounce
-  - **Manual** — results update only on `Enter` or clicking **Search**
-- Search is **scoped to the current folder only** — direct children of the active path
-- Live match counter (`12 matches`, `1 match`)
-- Filter clears automatically when navigating to a different folder
-- Mode preference persisted via QSettings
-- Press `Esc` or `✕` to dismiss and restore the full file list
+- **Real-time** (300 ms debounce) or **Manual** mode via drop-down
+- Scoped to the **current folder only** — direct children of the active path
+- Live match counter; clears automatically on navigation; mode persisted via QSettings
 
 ### ✏️ Smart Rename *(Ctrl+R)*
 A full-featured batch rename engine with live preview and undo support.
 
-**Tab 1 — Find & Replace**
-- Multi-pattern rules in `pattern, replacement` pairs (e.g. `LK21-, , (2023), `)
-- Prefix and Suffix injection
-- Case conversion: No Change / lowercase / UPPERCASE / Title Case / camelCase / snake_case
-- Extension override (e.g. `.txt`, `.jpg`)
-- Remove special characters option
-- Replace spaces with custom character option
+**Tab 1 — Find & Replace** — multi-pattern rules, prefix/suffix, case conversion, extension override, remove special chars, space replacement
 
-**Tab 2 — Numbering**
-- Auto-increment counter appended to each filename
-- Configurable start number, zero-padding width, and separator character
+**Tab 2 — Numbering** — auto-increment counter with configurable start, padding, and separator
 
-**Tab 3 — Regex**
-- Full Python `re`-compatible pattern matching
-- Capture group substitution with `\1`, `\2`, etc.
-- Enable/disable toggle so the tab is non-destructive by default
+**Tab 3 — Regex** — full Python `re` patterns with capture group substitution; enable/disable toggle
 
-**Live Preview Table** — updates in real time as you type; renamed entries highlighted in accent color.  
-**Preview Dialog** — review the full before/after diff before committing.  
-**Undo Last Rename** — reverses the entire most-recent batch in one click.
+**Live Preview Table** — real-time updates; **Preview All** dialog; **Undo Last Rename** in one click.
 
-> The Smart Rename panel is hidden by default. Open it with **Ctrl+R**.
+> Smart Rename is hidden by default. Open with **Ctrl+R**.
 
 ### 📝 Activity Log
-- Color-coded log entries: `INFO`, `NAV`, `SUCCESS`, `ERROR`, `COPY`, `MOVE`, `RENAME`, `CREATE`, `DELETE`
+- Color-coded entries: `INFO`, `NAV`, `SUCCESS`, `ERROR`, `COPY`, `MOVE`, `RENAME`, `CREATE`, `DELETE`
 - Every file operation logged automatically, including wallpaper changes
-- **Export** log to `.txt`, **Clear** with one click
-- Monospaced font view with auto-scroll
-
-> The Activity Log panel is hidden by default. Enable via View → Toggle Activity Log.
+- **Export** to `.txt`, **Clear** with one click; monospaced auto-scroll view
 
 ### 🎨 Theme System
-- **Dark theme** (default) — deep navy/slate palette with purple accents (`#7C3AED`)
-- **Light theme** — crisp white/slate palette with matching purple accents
-- Toggle with `Ctrl+D` or the toolbar button
-- All SVG icon strokes re-rendered per theme; frameless window controls adapt to both themes
-- Theme preference persisted across sessions
+- **Dark** (default) and **Light** themes with purple accents (`#7C3AED`)
+- All SVG icon strokes re-rendered per theme; window controls adapt to both
+- Toggle with `Ctrl+D`; persisted across sessions
 
 ### 💾 Session Persistence (QSettings)
-All of the following survive application restart:
-
-- Window size and position
-- Dock panel visibility and layout (Activity Log, Smart Rename, Quick View)
-- Main splitter width (sidebar vs content area)
-- Details view column widths and sort state
-- Smart Rename field values and active tab
-- Inline search mode (Real-time / Manual)
-- Sidebar panel proportions
-- Audio / video volume level
-- View mode, show/hide hidden files toggle, theme, bookmark list
+Window geometry, dock layout, main splitter width, column widths, sort state, Smart Rename fields and active tab, search mode, volume level, view mode, hidden files toggle, theme, and bookmark list — all persisted automatically.
 
 ### 🖥️ Terminal Integration
-- **Open Terminal Here** (`Ctrl+T`) launches the system terminal in the current directory
-- Auto-detects platform: `cmd.exe` (Windows), `Terminal.app` (macOS), or `gnome-terminal / xterm / konsole / xfce4-terminal / lxterminal` (Linux)
+**Open Terminal Here** (`Ctrl+T`) — auto-detects `cmd.exe` (Windows), `Terminal.app` (macOS), or `gnome-terminal / xterm / konsole / xfce4-terminal / lxterminal` (Linux).
 
 ### 🪟 Multi-Window
-- `Ctrl+N` opens a full independent application window
-- Tab context menu → "Open in New Window" opens the tab's current path in a new window
+`Ctrl+N` opens a new independent window. Tab context menu → **Open in New Window** opens the tab's current path in a new window.
 
 ---
 
@@ -207,6 +190,11 @@ All of the following survive application restart:
 | Dark Theme | Light Theme |
 |---|---|
 | ![Dark](screenshot/dark.png) | ![Light](screenshot/light.png) |
+
+---
+| Settings |
+|---|
+| ![Settings](screenshot/settings.png) |
 
 ---
 
@@ -227,7 +215,7 @@ All of the following survive application restart:
 | `pypdfium2` | 4.x+ | PDF page rendering in Quick View |
 | `PySide6-Addons` | 6.x | Audio and video playback (`QtMultimedia`) |
 
-> All optional packages degrade gracefully. The application starts without any of them and shows clear in-panel messages with install instructions where a feature requires a missing package.
+> All optional packages degrade gracefully — the application starts without any of them and shows clear in-panel messages with install instructions where needed.
 
 ---
 
@@ -278,6 +266,8 @@ pip install PySide6-Addons   # provides QtMultimedia for playback
 
 ## Running the Application
 
+All three files must be in the same directory:
+
 ```bash
 python macan_explorer.py
 ```
@@ -293,14 +283,12 @@ No build step, no resource compilation, no installer required.
 | Action | How |
 |---|---|
 | Open a folder | Double-click it in the file view |
-| Go back | `Alt+←` or the back button |
-| Go forward | `Alt+→` or the forward button |
+| Go back / forward | `Alt+←` / `Alt+→` or toolbar buttons |
 | Go up one level | `Alt+↑` or the up button |
 | Navigate via address bar | Type a path, press `Enter` |
 | Navigate via breadcrumb | Click any segment |
-| Open in a new tab | Right-click folder → Open in New Tab, or click `+` in the tab bar |
+| Open in a new tab | Right-click folder → Open in New Tab, or click `+` |
 | Open in a new window | Right-click tab → Open in New Window |
-| Switch tabs | Click the tab |
 
 ### File Operations
 
@@ -320,17 +308,24 @@ No build step, no resource compilation, no installer required.
 
 1. Press `F3` to open the Quick View panel.
 2. Select a single file — preview loads automatically.
-3. **Audio/Video** — click `▶` to play; click the seek bar to jump; drag the volume bar to adjust level.
+3. **Audio/Video** — click `▶` to play; click seek bar to jump; drag volume bar to adjust.
 4. **PDF** — use `◀` / `▶` to navigate pages.
 5. Resize the panel by dragging its left edge.
-6. Press `F3` again to close.
 
 ### Inline Search
 
-1. Press `Ctrl+F` — the search bar opens inside the current file view.
+1. Press `Ctrl+F` — search bar opens inside the current file view.
 2. Choose **Real-time** or **Manual** mode.
 3. Type your query — only items in the **current folder** are filtered.
 4. Press `Esc` or `✕` to close.
+
+### Settings
+
+Press `Ctrl+,` or go to **Tools → Settings**. Changes apply immediately — no restart required.
+
+### Help
+
+Press `F1` or go to **Help → Help** for searchable documentation covering every feature.
 
 ### Smart Rename Workflow
 
@@ -377,6 +372,8 @@ No build step, no resource compilation, no installer required.
 | `Ctrl+R` | Open Smart Rename panel |
 | `Ctrl+F` | Open inline search bar |
 | `F3` | Toggle Quick View panel |
+| `Ctrl+,` | Open Settings |
+| `F1` | Open Help |
 | `Ctrl+T` | Open terminal in current directory |
 | `Ctrl+D` | Toggle Dark / Light theme |
 | `Ctrl+H` | Toggle show / hide hidden files |
@@ -388,7 +385,7 @@ No build step, no resource compilation, no installer required.
 ### Application data — `~/.macan_explorer/`
 ```
 ~/.macan_explorer/
-├── macan_explorer_config.json   # Bookmarks, view mode, theme, show-hidden flag
+├── macan_explorer_config.json   # Bookmarks, view mode, theme, settings flags
 ├── thumbnails/                  # MD5-hashed video thumbnail cache
 └── logs/
     ├── shrine_ritual_log.txt    # General log (rotating, max 1 MB × 5 backups)
@@ -410,12 +407,19 @@ To reset all session state, delete the relevant QSettings key or file.
 ## File Structure
 
 ```
-macan_explorer.py       # Entire application — single self-contained file (~5,431 lines)
+macan_explorer.py         # Core application          (~5,529 lines)
+explorer_settings.py      # Settings dialog module    (~741 lines)
+explorer_help.py          # Help system module        (~808 lines)
 screenshot/
-├── dark.png            # Dark theme screenshot
-└── light.png           # Light theme screenshot
+├── dark.png              # Dark theme screenshot
+└── light.png             # Light theme screenshot
+CHANGELOG.md
 README.md
 ```
+
+> All three `.py` files must reside in the same directory.
+> `explorer_settings` and `explorer_help` are imported lazily and do not
+> affect startup time when not in use.
 
 ### Internal Module Layout
 
@@ -426,43 +430,46 @@ macan_explorer.py
 ├── create_icon()                  Render SVG → QIcon with theme color
 ├── DARK_THEME_QSS / LIGHT_THEME_QSS
 │
-├── WorkerSignals       QObject    Shared signal class for thread workers
-├── FolderSizeWorker    QRunnable  Async folder size calculation
-├── ThumbnailWorker     QRunnable  Async video thumbnail generation (OpenCV)
-├── VideoPreviewWorker  QRunnable  Async video frame extraction for hover preview
+├── WorkerSignals         QObject    Shared signal class for thread workers
+├── FolderSizeWorker      QRunnable  Async folder size calculation
+├── FolderThumbnailWorker QRunnable  Lazy folder media scan (paths only, no Qt) ★ v8
+├── ThumbnailWorker       QRunnable  Async video thumbnail generation (OpenCV)
+├── VideoPreviewWorker    QRunnable  Async video frame extraction for hover preview
 │
-├── ErrorHandler                   Structured error capture
-├── ShrineLogger                   Rotating file logger
-├── ActivityLog                    In-app log with color-coded severity levels
-├── ConfigManager                  JSON-backed user config
+├── ErrorHandler                     Structured error capture
+├── ShrineLogger                     Rotating file logger
+├── ActivityLog                      In-app log with color-coded severity levels
+├── ConfigManager                    JSON-backed user config + feature flags
 │
-├── ThumbnailIconProvider  QFileSystemModel   Image + video + folder composite thumbnails
+├── ThumbnailIconProvider  QFileSystemModel   Lazy folder + image + video thumbnails
 ├── SortFilterProxyModel   QSortFilterProxyModel   Scoped search + hidden-file filter
 │
 ├── BreadcrumbBar      QWidget    Clickable path segment bar
 ├── CommandBar         QToolBar   Toolbar + theme-aware icon re-rendering
 ├── VideoHoverPreview  QLabel     Floating animated video hover overlay
 ├── FileView           QWidget    Core browser: tree/list/icons, inline search,
-│                                 context menu (wallpaper, folder properties)
+│                                 wallpaper, folder properties context menus
 │
 ├── Sidebar            QWidget    QSplitter [QuickAccess | Drives | Bookmarks]
 ├── TabManager         QWidget    QTabWidget + "+" dummy tab + context menu
 ├── TitleBar           QWidget    Frameless titlebar + theme-aware controls
 │
-├── DrivePropertiesDialog   QDialog
-├── PropertiesDialog        QDialog   File/folder metadata + inline rename
-├── OperationProgressDialog QProgressDialog
-│
+├── DrivePropertiesDialog / PropertiesDialog / OperationProgressDialog
 ├── RenameRule / SmartRenameEngine / RenamePreviewDialog
 ├── SmartRenameDock    QWidget    3-tab rename UI + live preview
-│
 ├── AboutDialog        QDialog
-├── QuickViewPanel     QWidget    Image / text / audio / video / PDF preview
-│                                  + playback controls + cover art
+├── QuickViewPanel     QWidget    Image / text / audio▶ / video▶ / PDF📄
 ├── ActivityLogDock    QWidget    Dockable activity log
-│
 └── MainWindow         QMainWindow  Root: menu, layout, QSettings, signals
+
+explorer_settings.py
+└── SettingsDialog     QDialog    8-section settings UI (lazy import)
+
+explorer_help.py
+└── HelpDialog         QDialog    30-article searchable help (lazy import)
 ```
+
+*★ new in v8.0.0*
 
 ---
 
@@ -470,11 +477,12 @@ macan_explorer.py
 
 Macan Explorer follows a **signal-driven MVC-like pattern**:
 
-- **Model layer:** `ThumbnailIconProvider` (extends `QFileSystemModel`) is the single source of truth; `SortFilterProxyModel` handles sorting, hidden-file filtering, and scoped search.
+- **Model layer:** `ThumbnailIconProvider` (extends `QFileSystemModel`) is the single source of truth; `SortFilterProxyModel` handles sorting, hidden-file filtering, and scoped search. Folder thumbnail detection is now fully lazy and thread-safe — a `QTimer.singleShot` debounce gate triggers `FolderThumbnailWorker` which collects file paths in the background; all Qt painting happens on the main thread in `_on_folder_thumb_done`.
 - **View layer:** `FileView` renders the model in three switchable modes; `QuickViewPanel` previews the selected file with full media playback.
-- **Controller layer:** `MainWindow` wires all signals into coordinated actions.
-- **Worker threads:** `FolderSizeWorker`, `ThumbnailWorker`, and `VideoPreviewWorker` run in shared `QThreadPool` instances; results consumed on the main thread via signals.
-- **Persistence:** `QSettings` (session state) + `ConfigManager` JSON (bookmarks, prefs).
+- **Controller layer:** `MainWindow` wires all signals into coordinated actions. Settings changes propagate via cache clears and tab refreshes.
+- **Worker threads:** `FolderSizeWorker`, `FolderThumbnailWorker`, `ThumbnailWorker`, and `VideoPreviewWorker` run in dedicated `QThreadPool` instances; all results are delivered to the main thread via signals.
+- **Persistence:** `QSettings` (session state) + `ConfigManager` JSON (bookmarks, feature flags, preferences).
+- **Modules:** `explorer_settings` and `explorer_help` are lazily imported to avoid startup overhead.
 
 ```
 MainWindow
@@ -484,12 +492,15 @@ MainWindow
  ├── Sidebar               ← QSplitter [QuickAccess | Drives | Bookmarks]
  ├── TabManager            ← n × FileView + "+" tab + context menu
  │    └── FileView         ← ThumbnailIconProvider + SortFilterProxyModel
- │         ├── InlineSearchBar     ← real-time / manual scoped filter
- │         └── VideoHoverPreview   ← floating frame-animation overlay
+ │         ├── InlineSearchBar        ← real-time / manual scoped filter
+ │         └── VideoHoverPreview      ← floating frame-animation overlay
  ├── ActivityLogDock       ← QDockWidget, bottom, lazy-loaded
  ├── SmartRenameDock       ← QDockWidget, bottom, tabified
  └── QuickViewDock         ← QDockWidget, right, lazy-loaded
       └── QuickViewPanel   ← image / text / audio▶ / video▶ / PDF📄
+
+[Ctrl+,] → explorer_settings.SettingsDialog   (lazy import)
+[F1]     → explorer_help.HelpDialog           (lazy import)
 ```
 
 ---
@@ -497,12 +508,29 @@ MainWindow
 ## Known Limitations
 
 - **Single-pane layout** — dual-pane (commander-style) browsing is not available.
+- **Local filesystem only** — no network, FTP, or cloud path support.
 - **Video thumbnails & hover preview require OpenCV** — generic icon shown otherwise.
 - **Audio/video playback requires PySide6-Addons** — panel shows install instructions otherwise.
 - **PDF preview requires pypdfium2** — panel shows install instructions otherwise.
 - **Recycle Bin on network drives** — `send2trash` may fall back to permanent deletion on certain network or Linux configurations.
 - **Smart Rename undo** — covers only the most recent batch; general filesystem undo is not implemented.
 - **Inline search** — current folder only; recursive subdirectory search not yet available.
+
+---
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for the full version history.
+
+**v8.0.0 highlights:** Lazy thread-safe folder detection (`FolderThumbnailWorker` + `QTimer.singleShot`), Settings dialog (`Ctrl+,`, 8 sections, 741 lines), Help system (`F1`, 30 articles, 808 lines), 4 bug fixes including illegal Qt painting from worker thread.
+
+**v7.5.0 highlights:** Audio/video playback in Quick View, PDF rendering, Set as Wallpaper, Folder Properties context menu.
+
+**v6.5.0 highlights:** Tab close button fix, tab context menu, QSettings full persistence (column widths, sort, volume).
+
+**v6.0.0 highlights:** Inline scoped search, "+" tab, Quick View panel, folder thumbnails, video hover, Recycle Bin.
+
+**v5.0.0 / v4.3.0:** *(Source available)* — see Releases page.
 
 ---
 
