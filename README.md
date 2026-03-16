@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v8.5.0
+### Enterprise Edition · v8.7.0
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-8.5.0-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-8.7.0-purple?style=flat-square)
 
 </div>
 
@@ -19,7 +19,8 @@
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all distributed as a small set of self-contained Python files.
 
-Version 8.5 — *"Windows Shell Context Menu Integration"* — A dedicated module that reads the Windows registry at runtime and injects installed-application context menu entries directly into Macan Explorer's right-click menu — identical to what Windows Explorer shows, without any manual configuration by the user.
+Version 8.7 — *"Precision & Clarity"* **Macan Explorer 8.7** is a focused quality release that addresses two specific issues discovered during post-8.5 testing: the "Open with…" shell
+menu entry that silently did nothing when clicked, and the Smart Rename live preview panel that was too small and poorly positioned to be genuinely useful. Both have been resolved with targeted, root-cause-driven fixes.
 
 ---
 
