@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v8.8.1
+### Enterprise Edition · v8.8.4
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-8.8.1-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-8.8.4-purple?style=flat-square)
 
 </div>
 
@@ -19,7 +19,7 @@
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all distributed as a small set of self-contained Python files.
 
-Version 8.8.1 — introduces the Filmstrip panel — a horizontal image thumbnail strip that mirrors the navigation model from Macan Viewer directly inside the file manager
+Version 8.8.4 — Macan Explorer v8.8.4 is a stability and correctness patch addressing five bugs discovered during post-8.8.1 testing in a live Windows environment. Three relate to the Properties dialog folder counting pipeline introduced in v8.8.1, one to a Qt signal type overflow on large drives, and one to a cascading stylesheet issue in the Settings dialog that caused button labels to render invisibly in light theme.
 
 ---
 
