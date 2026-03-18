@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v8.8.4
+### Enterprise Edition · v8.9.0
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-8.8.4-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-8.9.0-purple?style=flat-square)
 
 </div>
 
@@ -19,7 +19,13 @@
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all distributed as a small set of self-contained Python files.
 
-Version 8.8.4 — Macan Explorer v8.8.4 is a stability and correctness patch addressing five bugs discovered during post-8.8.1 testing in a live Windows environment. Three relate to the Properties dialog folder counting pipeline introduced in v8.8.1, one to a Qt signal type overflow on large drives, and one to a cascading stylesheet issue in the Settings dialog that caused button labels to render invisibly in light theme.
+> **Macan Explorer 8.9.0** is a feature and stability release centred on four
+> areas: a completely redesigned file-copy progress dialog with real-time
+> byte-level throughput reporting; a new cross-platform network/workgroup
+> browser with auto-discovery; Recycle Bin integration in the Quick Access
+> sidebar; and a comprehensive crash-safety overhaul of all background-thread
+> and QTimer interactions that prevented force-close on slow or unreachable
+> network hosts.
 
 ---
 
@@ -195,6 +201,11 @@ Window geometry, dock layout, main splitter width, column widths, sort state, Sm
 | Settings |
 |---|
 | ![Settings](screenshot/settings.png) |
+
+---
+| Network |
+|---|
+| ![Network](screenshot/network.png) |
 
 ---
 
