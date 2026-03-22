@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v8.9.2
+### Enterprise Edition · v9.0.0
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-8.9.2-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-9.0.0-purple?style=flat-square)
 
 </div>
 
@@ -19,14 +19,18 @@
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all distributed as a small set of self-contained Python files.
 
-> **Macan Explorer 8.9.2** introduces a fully redesigned file-conflict
-> resolution system for copy and move operations. Previously, any filename
-> collision during a paste was silently resolved by appending an auto-generated
-> suffix — giving the user no opportunity to review or intervene. This release
-> replaces that silent behaviour with a structured, theme-aware conflict
-> pipeline: a pre-operation summary dialog lists every conflicting file before
-> a single byte is transferred, and four distinct resolution strategies are
-> available — Replace, Skip, Auto-rename, and per-file manual review.
+> **Macan Explorer 9.0.0** is the largest feature release since the Enterprise
+> Edition launch at v5.0.0. Three independent productivity pillars land
+> simultaneously: a **Dual Pane** split view that turns Macan Explorer into a
+> genuine two-panel file manager; a **Recursive Search** engine that walks
+> entire folder trees — or full drive roots — in a background thread and
+> streams results in real time; and an **inline Quick-Action Toolbar** embedded
+> directly in the breadcrumb bar for single-click Cut, Copy, Paste, and Delete
+> without opening any menu. The `explorer_help` documentation has been
+> completely rewritten for v9.0.0, covering every new feature with accurate
+> keyboard shortcut references, per-platform behaviour tables, and updated
+> QSettings keys. A long-standing visual defect in the Cut toolbar icon has
+> also been corrected
 ---
 
 ## ⚠️ Source Code Availability
