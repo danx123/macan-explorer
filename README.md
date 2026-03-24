@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v9.0.1
+### Enterprise Edition · v9.0.5
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-9.0.1-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-9.0.5-purple?style=flat-square)
 
 </div>
 
@@ -19,14 +19,17 @@
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all distributed as a small set of self-contained Python files.
 
-> **Macan Explorer 9.0.1** is a targeted refinement release that tightens the
-> boundary between view modes and their associated rendering behaviour.
-> Thumbnail generation for image and video files is now strictly scoped to
-> **Icons mode** — the only view in which thumbnails are visually meaningful.
-> Details and List modes return to clean, lightweight OS-native icons,
-> eliminating the unnecessary I/O and background worker activity that previously
-> occurred regardless of the active view. A signal-routing defect that caused
-> image thumbnails to fail silently in Icons mode has also been resolved.
+> **Macan Explorer 9.0.5** delivers four targeted fixes and one architectural
+> change that collectively address stability, visual correctness, and platform
+> integration. The custom frameless window has been replaced with the native OS
+> title bar, restoring standard window management behaviour across all supported
+> platforms. The sidebar Drives panel has been rebuilt around a live
+> `QFileSystemModel` tree view — matching the proven approach from v9.0.1 — so
+> that drives and their sub-folders are always visible and navigable. A
+> race-condition in `QFileSystemModel` initialisation that caused the drive list
+> to appear empty on first launch has been resolved. Theme-switching now
+> correctly recolours every sidebar icon, eliminating the white-on-white icon
+> problem that appeared in Light mode.
 ---
 
 ## ⚠️ Source Code Availability
