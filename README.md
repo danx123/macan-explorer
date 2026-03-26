@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v9.5.0
+### Enterprise Edition · v9.8.0
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-9.5.0-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-9.8.0-purple?style=flat-square)
 
 </div>
 
@@ -19,16 +19,18 @@
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all distributed as a small set of self-contained Python files.
 
-> **Macan Explorer 9.5.0** delivers two headline features alongside a framework
-> upgrade. Keyboard navigation gains a context-aware **Backspace** shortcut that
-> navigates back in the file view — matching the behaviour of modern web browsers
-> and OS file managers — while correctly falling through to normal text editing
-> whenever a text input widget is focused. The Properties dialog gains a
-> dedicated **Image Details** tab for all recognised image formats, subdivided
-> into three scrollable sub-tabs covering basic image properties, a full EXIF
-> record, and GPS location metadata. The underlying UI framework has also been
-> updated from **PySide6 v6.10.2 → v6.11.0**, bringing Qt 6.11 improvements in
-> rendering, accessibility, and platform integration.
+> **Macan Explorer 9.8.0** introduces three targeted quality-of-life
+> improvements that bring the file browsing experience closer to the conventions
+> of the host operating system. The **List view** is redesigned as a true
+> multi-column layout that flows and wraps automatically to fill the available
+> window width — eliminating the visual overlap with Details mode that existed
+> in prior releases. **Drive Properties** now delegates entirely to the Windows
+> Shell, opening the native OS dialog with full access to formatting, drive
+> optimisation, error checking, hardware information, and sharing options.
+> Finally, the **status bar** gains richer multi-selection feedback: selecting
+> any combination of files and folders immediately displays a breakdown by item
+> type alongside a calculated total size, updated asynchronously so the UI
+> never blocks.
 
 ---
 
