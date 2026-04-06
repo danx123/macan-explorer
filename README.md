@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v9.8.2
+### Enterprise Edition · v9.8.3
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-9.8.2-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-9.8.3-purple?style=flat-square)
 
 </div>
 
@@ -19,14 +19,11 @@
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all distributed as a small set of self-contained Python files.
 
-> **Macan Explorer 9.8.2** delivers two focused refinements to the sidebar and
-> file browser. The **Drives sidebar** gains a fully context-aware right-click
-> menu that exposes the complete set of file-management operations directly from
-> the folder tree — eliminating the need to navigate to a location before acting
-> on it. The **List view** is further refined with a viewport-relative row count,
-> a font-measured 30-character column width, and horizontal scrolling, producing
-> a layout that adapts precisely to both window size and system font settings
-> rather than relying on fixed pixel dimensions.
+> **Macan Explorer 9.8.3** is a focused patch release that resolves a
+> long-standing regression in tab management. The **"Open in New Tab"**
+> action — available from the file view context menu, the Drives sidebar tree,
+> and the keyboard shortcut — now consistently opens the requested folder in a
+> new tab and activates it correctly under all conditions.
 
 ---
 
