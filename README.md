@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v9.8.3
+### Enterprise Edition · v9.8.5
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-9.8.3-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-9.8.5-purple?style=flat-square)
 
 </div>
 
@@ -19,11 +19,12 @@
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all distributed as a small set of self-contained Python files.
 
-> **Macan Explorer 9.8.3** is a focused patch release that resolves a
-> long-standing regression in tab management. The **"Open in New Tab"**
-> action — available from the file view context menu, the Drives sidebar tree,
-> and the keyboard shortcut — now consistently opens the requested folder in a
-> new tab and activates it correctly under all conditions.
+> **Macan Explorer 9.8.5** is a dual-focus patch release addressing two
+> independent defect clusters. Settings toggles for the **Sidebar sections**
+> and **Status Bar** now take effect immediately without requiring a restart.
+> A suite of targeted optimisations also eliminates the **"not responding"**
+> pauses and **focus-loss flicker** experienced on Windows 11 24H2 / 25H2,
+> particularly during cursor hover over the file view and sidebar.
 
 ---
 
