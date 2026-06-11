@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v9.9.1
+### Enterprise Edition · v9.9.2
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-9.9.1-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-9.9.2-purple?style=flat-square)
 
 </div>
 
@@ -19,7 +19,7 @@
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all distributed as a small set of self-contained Python files.
 
-> **Macan Explorer 9.8.6** is a performance-focused patch release addressing
+> **Macan Explorer** is a performance-focused patch release addressing
 > three independent categories of latency and UI responsiveness degradation.
 > Drive tree initialisation is now significantly faster thanks to the
 > elimination of redundant filesystem watches and repeated root-index repaints.
