@@ -15,6 +15,11 @@
 
 ---
 
+<img width="1024" height="1536" alt="macan explorer v9 9 2" src="https://github.com/user-attachments/assets/25c33a73-73fa-443d-a49f-eb4bca01c7ec" />
+
+
+---
+
 ## Overview
 
 Macan Explorer is an enterprise-grade file management application designed for users who need more than their operating system's default file browser. Built entirely in Python on top of the PySide6 / Qt6 framework, it delivers a clean frameless UI, multi-tab navigation, a powerful batch rename engine, a real-time activity log, and deep session persistence — all distributed as a small set of self-contained Python files.
