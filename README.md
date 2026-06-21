@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v9.9.2
+### Enterprise Edition · v9.9.3
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,14 +9,9 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-9.9.2-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-9.9.3-purple?style=flat-square)
 
 </div>
-
----
-
-<img width="1024" height="1536" alt="macan explorer v9 9 2" src="https://github.com/user-attachments/assets/25c33a73-73fa-443d-a49f-eb4bca01c7ec" />
-
 
 ---
 
@@ -32,7 +27,7 @@ Macan Explorer is an enterprise-grade file management application designed for u
 > metadata parsing until after the dialog is first rendered. A further round of
 > targeted optimisations eliminates the remaining **"not responding"** pauses
 > and **focus-loss flicker** during cursor hover, complementing the work
-> introduced in 9.8.5.
+
 
 ---
 
