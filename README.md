@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🐅 Macan Explorer
-### Enterprise Edition · v9.9.6
+### Enterprise Edition · v10.0.1
 
 **A fast, keyboard-first file manager built with PySide6 for developers, creators, and power users.**
 
@@ -9,7 +9,7 @@
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green?style=flat-square&logo=qt)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Version](https://img.shields.io/badge/Version-9.9.6-purple?style=flat-square)
+![Version](https://img.shields.io/badge/Version-10.0.1-purple?style=flat-square)
 
 </div>
 
@@ -143,7 +143,7 @@ A full-featured settings dialog with eight categorised sections:
 
 Changes are written immediately to `ConfigManager` / `QSettings` and applied live on close.
 
-### 📖 Help System *(F1)* — **New in v8.0**
+### 📖 Help System *(F1)* — **New in v10.0.1**
 A searchable, article-based help dialog with 30 articles across 9 sections:
 
 - Getting Started (Welcome, Installation, Interface Overview)
