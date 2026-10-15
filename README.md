@@ -10,6 +10,8 @@
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
 ![Version](https://img.shields.io/badge/Version-10.3.0-purple?style=flat-square)
+![Rust](https://img.shields.io/badge/native%20engine-Rust-orange?style=flat-square)
+![Total Downloads](https://img.shields.io/github/downloads/danx123/macan-explorer/total?style=flat-square&color=E8FF00&label=downloads)
 
 </div>
 
